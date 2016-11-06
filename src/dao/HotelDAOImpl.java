@@ -3,7 +3,7 @@ package dao;
 import entities.Hotel;
 import java.util.List;
 
-public class HotelDAO implements AbstractDAO<Hotel> {
+public class HotelDAOImpl implements AbstractDAO<Hotel> {
     @Override
     public Hotel save(Hotel hotel) {
         return null;
