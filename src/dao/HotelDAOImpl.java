@@ -62,6 +62,7 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
         try {
             hotelIs = new ObjectInputStream(new FileInputStream(fileHotels));
             hotels = (List<Hotel>) hotelIs.readObject();
+            hotelIs.close();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
