@@ -9,7 +9,7 @@ import java.util.List;
 public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
     List<Hotel> hotels = new ArrayList<>();
-    File fileHotels = new File("fileHotels.bin");
+    File fileHotels = new File("persist\\fileHotels.bin");
     ObjectOutputStream hotelOs;
     ObjectInputStream hotelIs;
 
