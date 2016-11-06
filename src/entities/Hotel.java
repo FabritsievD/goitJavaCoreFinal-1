@@ -6,12 +6,14 @@ public class Hotel {
     private long hotelId;
     private String city;
     private String name;
+    private int stars;
     private List<Room> rooms;
 
-    public Hotel(long hotelId, String city, String name, List<Room> rooms) {
+    public Hotel(long hotelId, String city, String name, int stars, List<Room> rooms) {
         this.hotelId = hotelId;
         this.city = city;
         this.name = name;
+        this.stars = stars;
         this.rooms = rooms;
     }
 
@@ -29,5 +31,9 @@ public class Hotel {
 
     public List<Room> getRooms() {
         return rooms;
+    }
+
+    public int getStars() {
+        return stars;
     }
 }
