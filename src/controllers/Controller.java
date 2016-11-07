@@ -15,12 +15,12 @@ public class Controller {
         System.out.println("User " + user + " is registered");
     }
     public Set<Hotel> findHotelByName(String name){
-        Set<Hotel> hotels = HotelDAOImpl.getInstance().getList().stream().filter(h -> h.getName().equals(name)).collect(Collectors.toSet());
+        Set<Hotel> hotels = HotelDAOImpl.getInstance().getAll().stream().filter(h -> h.getName().equals(name)).collect(Collectors.toSet());
         return hotels;
     }
 
     public Set<Hotel> findHotelByCity(String city){
-        Set<Hotel> hotels = HotelDAOImpl.getInstance().getList().stream().filter(h -> h.getCity().equals(city)).collect(Collectors.toSet());
+        Set<Hotel> hotels = HotelDAOImpl.getInstance().getAll().stream().filter(h -> h.getCity().equals(city)).collect(Collectors.toSet());
         return hotels;
     }
 
