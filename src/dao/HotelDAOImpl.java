@@ -3,13 +3,14 @@ package dao;
 import entities.Hotel;
 
 import java.io.*;
+import java.util.HashSet;
 import java.util.Set;
 
 public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
 
     private static HotelDAOImpl instance = new HotelDAOImpl();
-    private Set<Hotel> hotels;
+    private Set<Hotel> hotels = new HashSet<>();
     private File fileHotels = new File("persist\\fileHotels.bin");
     private ObjectOutputStream hotelOs;
     private ObjectInputStream hotelIs;
@@ -26,9 +27,7 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
     public Hotel save(Hotel hotel) {
         if(hotel!=null) {
             hotels = getAll();
-            if (!hotels.contains(hotel)) {
-                hotels.add(hotel);
-            }
+            hotels.add(hotel);
             saveAll(hotels);
         }
         return hotel;
