@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 public class Controller {
     public void registerUser(User user){
-        CurrentUser currentUser = new CurrentUser(user);
         System.out.println("User " + user + " is registered");
     }
     public Set<Hotel> findHotelByName(String name){
