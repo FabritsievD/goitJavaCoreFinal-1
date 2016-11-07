@@ -5,6 +5,7 @@ import entities.CurrentUser;
 import entities.Hotel;
 import entities.User;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class Controller {
 
     public void cancelReservation(long roomId, long userId, long hotelId){}
 
-    public Set<Hotel> findRoom(Map<String, String> params){
+    public static Set<Hotel> findRoom(Map<String, String> params){
         //Output sample: city - Kiev, hotelName - Radisson, price - 200, persons - 2
         return null;
     }
