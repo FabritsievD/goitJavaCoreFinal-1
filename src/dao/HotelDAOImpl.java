@@ -8,11 +8,20 @@ import java.util.List;
 
 public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
-    List<Hotel> hotels = new ArrayList<>();
-    File fileHotels = new File("persist\\fileHotels.bin");
-    ObjectOutputStream hotelOs;
-    ObjectInputStream hotelIs;
 
+    private static HotelDAOImpl instance = new HotelDAOImpl();
+    private List<Hotel> hotels = new ArrayList<>();
+    private File fileHotels = new File("persist\\fileHotels.bin");
+    private ObjectOutputStream hotelOs;
+    private ObjectInputStream hotelIs;
+
+
+    public static HotelDAOImpl getInstance(){
+        return instance;
+    }
+
+    private HotelDAOImpl() {
+    }
 
     @Override
     public Hotel save(Hotel hotel) {
