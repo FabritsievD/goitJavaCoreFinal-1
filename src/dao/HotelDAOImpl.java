@@ -38,32 +38,36 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
     public void delete(Hotel hotel) {
         if(hotel!=null) {
             hotels = getAll();
-            if (hotels.contains(hotel)) {
-                hotels.remove(hotel);
-            }
-            saveAll(hotels);
+            hotels.remove(hotel);
         }
+        saveAll(hotels);
     }
 
     @Override
     public void deleteAll(Set<Hotel> hotels) {
-        this.hotels.removeAll(hotels);
+        this.hotels = getAll();
+        if(hotels.size() > 0 && hotels != null) {
+            this.hotels.removeAll(hotels);
+        }
         saveAll(this.hotels);
     }
 
     @Override
     public void saveAll(Set<Hotel> hotels) {
-        this.hotels = hotels;
-        try {
-            hotelOs = new ObjectOutputStream(new FileOutputStream(fileHotels));
-            hotelOs.writeObject(hotels);
-            hotelOs.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.err.println("File not found");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("IO Exception");
+        this.hotels = getAll();
+        if(hotels.size() > 0 && hotels != null) {
+            this.hotels.addAll(hotels);
+            try {
+                hotelOs = new ObjectOutputStream(new FileOutputStream(fileHotels));
+                hotelOs.writeObject(this.hotels);
+                hotelOs.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                System.err.println("File not found");
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.err.println("IO Exception");
+            }
         }
     }
 

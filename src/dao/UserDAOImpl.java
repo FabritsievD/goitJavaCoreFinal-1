@@ -24,27 +24,42 @@ public class UserDAOImpl implements AbstractDAO<User> {
 
     @Override
     public User save(User user) {
-        return null;
+        if(user!=null) {
+            users = getAll();
+            users.add(user);
+            saveAll(users);
+        }
+        return user;
     }
 
     @Override
     public void delete(User user) {
-
+        if(user!=null) {
+            users = getAll();
+            if (users.contains(user)) {
+                users.remove(user);
+            }
+            saveAll(users);
+        }
     }
 
     @Override
     public void deleteAll(Set<User> users) {
-
+        this.users = getAll();
+        if(users.size() > 0 && users != null) {
+            this.users.removeAll(users);
+        }
+        saveAll(this.users);
     }
 
     @Override
     public void saveAll(Set<User> users) {
         this.users = getAll();
-        if(users.size() > 0) {
+        if(users.size() > 0 && users != null) {
             this.users.addAll(users);
             try {
                 userOs = new ObjectOutputStream(new FileOutputStream(fileUsers));
-                userOs.writeObject(users);
+                userOs.writeObject(this.users);
                 userOs.close();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
