@@ -1,27 +1,30 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Room {
+public class Room implements Serializable {
     private Long roomId;
     private Integer persons;
     private Integer price;
     private String hotel;
     private String city;
-    private boolean userReserved;
+    private boolean isReserved;
     private Date dateAvalibleFrom;
+    private User userReserved;
 
     public Room() {
     }
 
-    public Room(long roomId, int persons, int price, String hotel, String city, boolean userReserved, Date dateAvalibleFrom) {
+    public Room(Long roomId, Integer persons, Integer price, String hotel, String city, boolean isReserved, Date dateAvalibleFrom, User userReserved) {
         this.roomId = roomId;
         this.persons = persons;
         this.price = price;
         this.hotel = hotel;
         this.city = city;
-        this.userReserved = userReserved;
+        this.isReserved = isReserved;
         this.dateAvalibleFrom = dateAvalibleFrom;
+        this.userReserved = userReserved;
     }
 
     public void setRoomId(long roomId) {
@@ -47,6 +50,10 @@ public class Room {
     public void setDateAvalibleFrom(Date dateAvalibleFrom) {
         this.dateAvalibleFrom = dateAvalibleFrom;
     }
+
+    public void setIsReserved(boolean reserved) {isReserved = reserved;}
+
+    public void setUserReserved(User userReserved) {this.userReserved = userReserved;}
 
     public String getCity() {
         return city;
@@ -86,8 +93,9 @@ public class Room {
                 ", price=" + price +
                 ", hotel='" + hotel + '\'' +
                 ", city='" + city + '\'' +
-                ", userReserved=" + userReserved +
+                ", isReserved=" + isReserved +
                 ", dateAvalibleFrom=" + dateAvalibleFrom +
+                ", userReserved=" + userReserved +
                 '}';
     }
 }
