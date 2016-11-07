@@ -3,14 +3,13 @@ package dao;
 import entities.Hotel;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
 
     private static HotelDAOImpl instance = new HotelDAOImpl();
-    private List<Hotel> hotels = new ArrayList<>();
+    private Set<Hotel> hotels;
     private File fileHotels = new File("persist\\fileHotels.bin");
     private ObjectOutputStream hotelOs;
     private ObjectInputStream hotelIs;
@@ -25,9 +24,11 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
     @Override
     public Hotel save(Hotel hotel) {
-        hotels = getList();
-        if(!hotels.contains(hotel)) {
-            hotels.add(hotel);
+        if(hotel!=null) {
+            hotels = getAll();
+            if (!hotels.contains(hotel)) {
+                hotels.add(hotel);
+            }
             saveAll(hotels);
         }
         return hotel;
@@ -35,22 +36,23 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
     @Override
     public void delete(Hotel hotel) {
-        hotels = getList();
-        if(hotels.contains(hotel)) {
-            hotels.remove(hotel);
+        if(hotel!=null) {
+            hotels = getAll();
+            if (hotels.contains(hotel)) {
+                hotels.remove(hotel);
+            }
             saveAll(hotels);
         }
-
     }
 
     @Override
-    public void deleteAll(List<Hotel> hotels) {
+    public void deleteAll(Set<Hotel> hotels) {
         this.hotels.removeAll(hotels);
         saveAll(this.hotels);
     }
 
     @Override
-    public void saveAll(List<Hotel> hotels) {
+    public void saveAll(Set<Hotel> hotels) {
         this.hotels = hotels;
         try {
             hotelOs = new ObjectOutputStream(new FileOutputStream(fileHotels));
@@ -63,14 +65,13 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
             e.printStackTrace();
             System.err.println("IO Exception");
         }
-
     }
 
     @Override
-    public List<Hotel> getList() {
+    public Set<Hotel> getAll() {
         try {
             hotelIs = new ObjectInputStream(new FileInputStream(fileHotels));
-            hotels = (List<Hotel>) hotelIs.readObject();
+            hotels = (Set<Hotel>) hotelIs.readObject();
             hotelIs.close();
         } catch (IOException e) {
             e.printStackTrace();

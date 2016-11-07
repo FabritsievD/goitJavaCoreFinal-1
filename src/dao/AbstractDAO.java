@@ -1,11 +1,11 @@
 package dao;
 
-import java.util.List;
+import java.util.Set;
 
 public interface AbstractDAO<T> {
     T save(T t);
     void delete(T t);
-    void deleteAll(List<T> t);
-    void saveAll(List<T> t);
-    List<T> getList();
+    void deleteAll(Set<T> t);
+    void saveAll(Set<T> t);
+    Set<T> getAll();
 }
