@@ -9,14 +9,14 @@ public class Room implements Serializable {
     private Integer price;
     private String hotel;
     private String city;
-    private boolean isReserved;
+    private Boolean isReserved;
     private Date dateAvalibleFrom;
     private User userReserved;
 
     public Room() {
     }
 
-    public Room(Long roomId, Integer persons, Integer price, String hotel, String city, boolean isReserved, Date dateAvalibleFrom, User userReserved) {
+    public Room(Long roomId, Integer persons, Integer price, String hotel, String city, Boolean isReserved, Date dateAvalibleFrom, User userReserved) {
         this.roomId = roomId;
         this.persons = persons;
         this.price = price;
@@ -86,7 +86,8 @@ public class Room implements Serializable {
         if (persons != null ? !persons.equals(room.persons) : false) return false;
         if (price != null ? !price.equals(room.price) : false) return false;
         if (dateAvalibleFrom != null ? !(dateAvalibleFrom.getTime()>=room.dateAvalibleFrom.getTime()) : false )return false;
-        return city != null ? city.equals(room.city) : room.city != null;
+        if(isReserved != null ? !isReserved.equals(room.isReserved) : false) return false;
+        return city != null ? city.equals(room.city) : true;
 
     }
 

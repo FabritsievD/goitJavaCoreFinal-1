@@ -1,17 +1,16 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 public class Hotel implements Serializable{
-    private long hotelId;
+    private Long hotelId;
     private String city;
     private String name;
-    private int stars;
+    private Integer stars;
     private Set<Room> rooms;
 
-    public Hotel(long hotelId, String city, String name, int stars, Set<Room> rooms) {
+    public Hotel(Long hotelId, String city, String name, Integer stars, Set<Room> rooms) {
         this.hotelId = hotelId;
         this.city = city;
         this.name = name;
