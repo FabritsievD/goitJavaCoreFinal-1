@@ -7,7 +7,7 @@ public class Room implements Serializable {
     private Long roomId;
     private Integer persons;
     private Integer price;
-    private Hotel hotel;
+    private String hotel;
     private String city;
     private boolean isReserved;
     private Date dateAvalibleFrom;
@@ -16,7 +16,7 @@ public class Room implements Serializable {
     public Room() {
     }
 
-    public Room(Long roomId, Integer persons, Integer price, Hotel hotel, String city, boolean isReserved, Date dateAvalibleFrom, User userReserved) {
+    public Room(Long roomId, Integer persons, Integer price, String hotel, String city, boolean isReserved, Date dateAvalibleFrom, User userReserved) {
         this.roomId = roomId;
         this.persons = persons;
         this.price = price;
@@ -39,7 +39,7 @@ public class Room implements Serializable {
         this.price = price;
     }
 
-    public void setHotel(Hotel hotel) {
+    public void setHotel(String hotel) {
         this.hotel = hotel;
     }
 
@@ -63,7 +63,7 @@ public class Room implements Serializable {
         return roomId;
     }
 
-    public Hotel getHotel() {
+    public String getHotel() {
         return hotel;
     }
 

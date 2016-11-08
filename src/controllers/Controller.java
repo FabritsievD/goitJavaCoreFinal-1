@@ -35,24 +35,40 @@ public class Controller {
     }
 
     public Set<Hotel> findHotelByName(String name){
+        /**
+         * Method returns list of Hotels by name
+         * if current user is registered
+         * otherwise method returns message and empty list
+         * */
         Set<Hotel> hotels = new HashSet<>();
+        //Check if current user is registered
         if(CurrentUser.getInstance().getUser()!=null && CurrentUser.getInstance().getUser().getIsRegistered()) {
+            //checks if hotel with given in input parameter hotel name exists
             hotels = HotelDAOImpl.getInstance().getAll()
                     .stream().filter(h -> h.getName().equals(name))
                     .collect(Collectors.toSet());
         }
+        //return message for unregistered user
         else System.out.println("Unabale to execute operation. User is not registered");
         return hotels;
     }
 
     public Set<Hotel> findHotelByCity(String city){
+        /**
+         * Method returns list of Hotels in target city
+         * if current user is registered
+         * otherwise method returns message and empty list
+         * */
         Set<Hotel> hotels = new HashSet<Hotel>();
+        //check if user registered
         if(CurrentUser.getInstance().getUser()!=null && CurrentUser.getInstance().getUser().getIsRegistered()) {
+            //checks if hotels in target city, given in input parameter, exist
             hotels = HotelDAOImpl.getInstance().getAll().stream()
                     .filter(h -> h.getCity().equals(city))
                     .collect(Collectors.toSet());
             return hotels;
         }
+        //return message for unregistered user
         else System.out.println("Unabale to execute operation. User is not registered");
         return hotels;
     }
