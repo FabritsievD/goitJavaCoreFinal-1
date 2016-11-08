@@ -38,6 +38,7 @@ public class UserDAOImpl implements AbstractDAO<User> {
             users.add(user);
             saveAll(users);
         }
+        this.users = getAll();
         return user;
     }
 
@@ -55,6 +56,7 @@ public class UserDAOImpl implements AbstractDAO<User> {
             }
             saveAll(users);
         }
+        this.users = getAll();
     }
 
     @Override
@@ -69,6 +71,7 @@ public class UserDAOImpl implements AbstractDAO<User> {
             this.users.removeAll(users);
         }
         saveAll(this.users);
+        this.users = getAll();
     }
 
     @Override
@@ -78,9 +81,8 @@ public class UserDAOImpl implements AbstractDAO<User> {
          * append given in input set of Users
          * and saves merged set of Users back to persistent storage
          * */
-        this.users = getAll();
         if(users.size() > 0 && users != null) {
-            this.users.addAll(users);
+            this.users = users;
             try {
                 userOs = new ObjectOutputStream(new FileOutputStream(fileUsers));
                 userOs.writeObject(this.users);
@@ -93,6 +95,7 @@ public class UserDAOImpl implements AbstractDAO<User> {
                 System.err.println("IO Exception");
             }
         }
+        this.users = getAll();
     }
 
     @Override

@@ -33,10 +33,11 @@ public class RoomDAOImpl implements AbstractDAO<Room> {
          * append to the set (if not exists yet) given Room
          * and saves updated set of Rooms back to persistent storage
          * */
-        rooms= getAll();
-        if(!rooms.contains(room)){
-            rooms.add(room);
-        }
+        this.rooms=getAll();
+        if(this.rooms.contains(room)) this.rooms.remove(room);
+        this.rooms.add(room);
+        saveAll(this.rooms);
+        this.rooms=getAll();
         return room;
     }
 
@@ -52,7 +53,7 @@ public class RoomDAOImpl implements AbstractDAO<Room> {
             rooms.remove(room);
         }
         saveAll(rooms);
-
+        rooms=getAll();
     }
 
     @Override
@@ -65,6 +66,7 @@ public class RoomDAOImpl implements AbstractDAO<Room> {
         this.rooms = getAll();
         this.rooms.removeAll(rooms);
         saveAll(this.rooms);
+        this.rooms=getAll();
 
     }
 
@@ -75,25 +77,21 @@ public class RoomDAOImpl implements AbstractDAO<Room> {
          * append given in input set of Rooms
          * and saves merged set of Rooms back to persistent storage
          * */
+        if(rooms.size() > 0 && rooms != null) {
+            this.rooms = rooms;
+            try {
+                roomOutputSt = new ObjectOutputStream(new FileOutputStream(fileRooms));
+                roomOutputSt.writeObject(this.rooms);
+                roomOutputSt.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                System.err.println("FileNotFoundException");
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.err.println("IOException");
+            }
+        }
         this.rooms = getAll();
-        if(rooms.size()>0){
-            this.rooms.addAll(rooms);
-        }
-
-        try {
-            roomOutputSt = new ObjectOutputStream(new FileOutputStream(fileRooms));
-            roomOutputSt.writeObject(this.rooms);
-            roomOutputSt.close();
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-            System.err.println("FileNotFoundException");
-        }
-        catch (IOException e){
-            e.printStackTrace();
-            System.err.println("IOException");
-        }
-
     }
 
     @Override

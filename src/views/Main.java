@@ -61,7 +61,7 @@ public class Main {
         h01.setRooms(hotel01RoomSet);
 
         //Create Hotel #2 in City #1
-        Hotel h02 = new Hotel(2,"Kyiv","Redisson", 5, null);
+        Hotel h02 = new Hotel(2,"Kiev","Redisson", 5, null);
         //Create rooms for Hotel #2
         Room r11 = new Room(201L,2,200,"Redisson","Kiev",false,null,null);
         Room r12 = new Room(202L,1,120,"Redisson","Kiev",false,null,null);
@@ -229,14 +229,15 @@ public class Main {
         //Get and print all saved rooms
         RoomDAOImpl.getInstance().getAll().forEach(System.out::println);
 
-        /***Test controller methods***/
+        /***Test controller methods with authorized user***/
 
         //Test for registered current user
         //register user
         Controller.getInstance().registerUser(u01);
         //make user current
         Controller.getInstance().switchCurrentUser(u01);
-        //find room
+
+        /***find room***/
         Map<String, String> findRoomsMap1 = new HashMap<>();
         // Find Room r21 = new Room(301L,2,150,"Ibis","Lviv",false,null,null);
         findRoomsMap1.put("City", "Lviv");
@@ -253,6 +254,47 @@ public class Main {
         findRoomsMap2.put("Price", "180");
         System.out.println(Controller.getInstance().findRoom(findRoomsMap2));
 
+        /***bookRoom***/
+        Controller.getInstance().bookRoom(301L, 1001L, 401L);
+        //RoomDAOImpl.getInstance().getAll().stream().filter(r -> r.getRoomId() == 301L).forEach(System.out::println);
+
+        /***cancel Room Reservation***/
+        Controller.getInstance().cancelReservation(301L, 1001L, 401L);
+
+        /***find Hotel by name***/
+        Controller.getInstance().findHotelByName("Bristol Hotel").stream().forEach(System.out::println);
+
+        /***find Hotel by city***/
+        Controller.getInstance().findHotelByCity("Kiev").stream().forEach(System.out::println);
+
+
+
+
+        /***Test controller methods with unauthorized user***/
+
+        //Test for registered current user
+        //make unregistered user current
+        Controller.getInstance().switchCurrentUser(u02);
+
+        /***find room***/
+        // Find Room r21 = new Room(301L,2,150,"Ibis","Lviv",false,null,null);
+        System.out.println(Controller.getInstance().findRoom(findRoomsMap1));
+
+        // Find Room r53 = new Room(603L,3,220,"Bristol Hotel","Odesa",false,null,null);
+        System.out.println(Controller.getInstance().findRoom(findRoomsMap2));
+
+        /***bookRoom***/
+        Controller.getInstance().bookRoom(301L, 1001L, 401L);
+        //RoomDAOImpl.getInstance().getAll().stream().filter(r -> r.getRoomId() == 301L).forEach(System.out::println);
+
+        /***cancel Room Reservation***/
+        Controller.getInstance().cancelReservation(301L, 1001L, 401L);
+
+        /***find Hotel by name***/
+        Controller.getInstance().findHotelByName("Bristol Hotel").stream().forEach(System.out::println);
+
+        /***find Hotel by city***/
+        Controller.getInstance().findHotelByCity("Kiev").stream().forEach(System.out::println);
 
     }
 }

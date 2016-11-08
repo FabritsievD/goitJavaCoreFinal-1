@@ -70,7 +70,7 @@ public class Controller {
          * if current user is registered
          * otherwise method returns message and empty list
          * */
-        Set<Hotel> hotels = new HashSet<Hotel>();
+        Set<Hotel> hotels = new HashSet<>();
         //check if user registered
         if(CurrentUser.getInstance().getUser()!=null && CurrentUser.getInstance().getUser().getIsRegistered()) {
             //checks if hotels in target city, given in input parameter, exist
@@ -161,16 +161,18 @@ public class Controller {
 
             if (findRoom(map).size() > 0) {
                 Iterator<Room> roomIterator = findRoom(map).iterator();
-                Room tmp = roomIterator.next();
-                if(!tmp.getIsReserved()) System.out.println("Room is not reserved at the moment");
-                else{
-                    if(!tmp.getUserReserved().equals(CurrentUser.getInstance().getUser())){
-                        System.out.println("Room is reserved by other user. You are not authorized cancel this reservation");
-                    }else {
-                        tmp.setIsReserved(false);
-                        tmp.setUserReserved(null);
-                        RoomDAOImpl.getInstance().save(tmp);
-                        System.out.println("Room "+ tmp + " reservation canceled");
+                while (roomIterator.hasNext()) {
+                    Room tmp = roomIterator.next();
+                   if (!tmp.getIsReserved()) System.out.println("Room is not reserved at the moment");
+                    else {
+                        if (!tmp.getUserReserved().equals(CurrentUser.getInstance().getUser())) {
+                            System.out.println("Room is reserved by other user. You are not authorized cancel this reservation");
+                        } else {
+                            tmp.setIsReserved(false);
+                            tmp.setUserReserved(null);
+                            RoomDAOImpl.getInstance().save(tmp);
+                            System.out.println("Room " + tmp + " reservation canceled");
+                        }
                     }
                 }
             }

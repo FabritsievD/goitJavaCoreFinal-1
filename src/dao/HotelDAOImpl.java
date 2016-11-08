@@ -38,6 +38,7 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
             hotels.add(hotel);
             saveAll(hotels);
         }
+        hotels = getAll();
         return hotel;
     }
 
@@ -53,6 +54,7 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
             hotels.remove(hotel);
         }
         saveAll(hotels);
+        hotels = getAll();
     }
 
     @Override
@@ -67,6 +69,7 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
             this.hotels.removeAll(hotels);
         }
         saveAll(this.hotels);
+        this.hotels = getAll();
     }
 
     @Override
@@ -76,8 +79,8 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
          * append given in input set of Hotels
          * and saves merged set of Hotels back to persistent storage
          * */
-        this.hotels = getAll();
         if(hotels.size() > 0 && hotels != null) {
+            this.hotels = hotels;
             this.hotels.addAll(hotels);
             try {
                 hotelOs = new ObjectOutputStream(new FileOutputStream(fileHotels));
@@ -91,6 +94,7 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
                 System.err.println("IO Exception");
             }
         }
+        this.hotels = getAll();
     }
 
     @Override
@@ -100,7 +104,7 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
          * */
         try {
             hotelIs = new ObjectInputStream(new FileInputStream(fileHotels));
-            hotels = (Set<Hotel>) hotelIs.readObject();
+                hotels = (Set<Hotel>) hotelIs.readObject();
             hotelIs.close();
         } catch (IOException e) {
             e.printStackTrace();
