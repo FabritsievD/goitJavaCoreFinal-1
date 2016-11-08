@@ -234,8 +234,9 @@ public class Controller {
                 } catch (ParseException e) {
                     System.out.println("Wrong date format");
                 }
-
-
+            }
+            if(params.containsKey("isReserved")){
+                neededRoom.setIsReserved(Boolean.parseBoolean(params.get("isReserved")));
             }
 
             Iterator<Room> iterator = RoomDAOImpl.getInstance().getAll().iterator();
