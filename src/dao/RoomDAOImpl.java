@@ -93,7 +93,7 @@ public class RoomDAOImpl implements AbstractDAO<Room> {
         }
         this.rooms = getAll();
     }
-
+    
     @Override
     public Set<Room> getAll() {
         /**
