@@ -104,8 +104,11 @@ public class Controller {
             if (findRoom(map).size() > 0) {
                 Iterator<Room> roomIterator = findRoom(map).iterator();
                 Room tmp = roomIterator.next();
-                tmp.setIsReserved(true);
-                tmp.setUserReserved(user);
+                if(tmp.getIsReserved()) System.out.println("Room already reserved");
+                else {
+                    tmp.setIsReserved(true);
+                    tmp.setUserReserved(user);
+                }
             }
         }
         else{
@@ -135,8 +138,15 @@ public class Controller {
             if (findRoom(map).size() > 0) {
                 Iterator<Room> roomIterator = findRoom(map).iterator();
                 Room tmp = roomIterator.next();
-                tmp.setIsReserved(false);
-                tmp.setUserReserved(null);
+                if(!tmp.getIsReserved()) System.out.println("Room is not reserved at the moment");
+                else{
+                    if(!tmp.getUserReserved().equals(CurrentUser.getInstance().getUser())){
+                        System.out.println("Room is reserved by other user. You are not authorized cancel this reservation");
+                    }else {
+                        tmp.setIsReserved(false);
+                        tmp.setUserReserved(null);
+                    }
+                }
             }
         }
         else{

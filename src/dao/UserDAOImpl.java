@@ -24,6 +24,11 @@ public class UserDAOImpl implements AbstractDAO<User> {
 
     @Override
     public User save(User user) {
+        /**
+         * Method gets all available in persistent storage Users
+         * append to the set (if not exists yet) given User
+         * and saves updated set of Users back to persistent storage
+         * */
         if(user!=null) {
             users = getAll();
             users.add(user);
@@ -34,6 +39,11 @@ public class UserDAOImpl implements AbstractDAO<User> {
 
     @Override
     public void delete(User user) {
+        /**
+         * Method gets all available in persistent storage Users
+         * removes given in input User from the set (if exists)
+         * and saves remaining Users back to persistent storage
+         * */
         if(user!=null) {
             users = getAll();
             if (users.contains(user)) {
@@ -45,6 +55,11 @@ public class UserDAOImpl implements AbstractDAO<User> {
 
     @Override
     public void deleteAll(Set<User> users) {
+        /**
+         * Method gets all available in persistent storage Users
+         * removes all Users given in input set
+         * and saves remaining Users back to persistent storage
+         * */
         this.users = getAll();
         if(users.size() > 0 && users != null) {
             this.users.removeAll(users);
@@ -54,6 +69,11 @@ public class UserDAOImpl implements AbstractDAO<User> {
 
     @Override
     public void saveAll(Set<User> users) {
+        /**
+         * Method gets all available in persistent storage Users
+         * append given in input set of Users
+         * and saves merged set of Users back to persistent storage
+         * */
         this.users = getAll();
         if(users.size() > 0 && users != null) {
             this.users.addAll(users);
@@ -73,6 +93,9 @@ public class UserDAOImpl implements AbstractDAO<User> {
 
     @Override
     public Set<User> getAll() {
+        /**
+         * Method gets all available in persistent storage Users
+         * */
         try {
             userIs = new ObjectInputStream(new FileInputStream(fileUsers));
             users = (Set<User>) userIs.readObject();

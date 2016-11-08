@@ -71,6 +71,10 @@ public class Room implements Serializable {
         return userReserved;
     }
 
+    public boolean getIsReserved() {
+        return isReserved;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

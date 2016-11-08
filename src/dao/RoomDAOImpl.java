@@ -21,6 +21,11 @@ public class RoomDAOImpl implements AbstractDAO<Room> {
 
     @Override
     public Room save(Room room) {
+        /**
+         * Method gets all available in persistent storage Rooms
+         * append to the set (if not exists yet) given Room
+         * and saves updated set of Rooms back to persistent storage
+         * */
         rooms= getAll();
         if(!rooms.contains(room)){
             rooms.add(room);
@@ -30,6 +35,11 @@ public class RoomDAOImpl implements AbstractDAO<Room> {
 
     @Override
     public void delete(Room room) {
+        /**
+         * Method gets all available in persistent storage Rooms
+         * removes given in input Room from the set (if exists)
+         * and saves remaining Rooms back to persistent storage
+         * */
         rooms = getAll();
         if(rooms.contains(room)){
             rooms.remove(room);
@@ -40,6 +50,11 @@ public class RoomDAOImpl implements AbstractDAO<Room> {
 
     @Override
     public void deleteAll(Set<Room> rooms) {
+        /**
+         * Method gets all available in persistent storage Rooms
+         * removes all Rooms given in input set
+         * and saves remaining Rooms back to persistent storage
+         * */
         this.rooms = getAll();
         this.rooms.removeAll(rooms);
         saveAll(this.rooms);
@@ -48,6 +63,11 @@ public class RoomDAOImpl implements AbstractDAO<Room> {
 
     @Override
     public void saveAll(Set<Room> rooms) {
+        /**
+         * Method gets all available in persistent storage Rooms
+         * append given in input set of Rooms
+         * and saves merged set of Rooms back to persistent storage
+         * */
         this.rooms = getAll();
         if(rooms.size()>0){
             this.rooms.addAll(rooms);
@@ -71,6 +91,9 @@ public class RoomDAOImpl implements AbstractDAO<Room> {
 
     @Override
     public Set<Room> getAll() {
+        /**
+         * Method gets all available in persistent storage Rooms
+         * */
         try{
             roomIputSt = new ObjectInputStream(new FileInputStream(fileRooms));
             rooms = (Set<Room>)roomIputSt.readObject();

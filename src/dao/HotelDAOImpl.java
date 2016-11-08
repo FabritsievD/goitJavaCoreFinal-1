@@ -25,6 +25,11 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
     @Override
     public Hotel save(Hotel hotel) {
+        /**
+         * Method gets all available in persistent storage Hotels
+         * append to the set (if not exists yet) given Hotel
+         * and saves updated set of Hotels back to persistent storage
+         * */
         if(hotel!=null) {
             hotels = getAll();
             hotels.add(hotel);
@@ -35,6 +40,11 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
     @Override
     public void delete(Hotel hotel) {
+        /**
+         * Method gets all available in persistent storage Hotels
+         * removes given in input Hotel from the set (if exists)
+         * and saves remaining Hotels back to persistent storage
+         * */
         if(hotel!=null) {
             hotels = getAll();
             hotels.remove(hotel);
@@ -44,6 +54,11 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
     @Override
     public void deleteAll(Set<Hotel> hotels) {
+        /**
+         * Method gets all available in persistent storage Hotels
+         * removes all Hotels given in input set
+         * and saves remaining Hotels back to persistent storage
+         * */
         this.hotels = getAll();
         if(hotels.size() > 0 && hotels != null) {
             this.hotels.removeAll(hotels);
@@ -53,6 +68,11 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
     @Override
     public void saveAll(Set<Hotel> hotels) {
+        /**
+         * Method gets all available in persistent storage Hotels
+         * append given in input set of Hotels
+         * and saves merged set of Hotels back to persistent storage
+         * */
         this.hotels = getAll();
         if(hotels.size() > 0 && hotels != null) {
             this.hotels.addAll(hotels);
@@ -72,6 +92,9 @@ public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
     @Override
     public Set<Hotel> getAll() {
+        /**
+         * Method gets all available in persistent storage Hotels
+         * */
         try {
             hotelIs = new ObjectInputStream(new FileInputStream(fileHotels));
             hotels = (Set<Hotel>) hotelIs.readObject();
