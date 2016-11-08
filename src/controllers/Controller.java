@@ -74,6 +74,12 @@ public class Controller {
     }
 
     public void bookRoom(long roomId, long userId, long hotelId){
+        /**
+         * If current user is registered, method searches needed room by using hotelId and roomId.
+         * Also searches user, which wants to book room, using userId. If such room
+         * exist and not reserved yet - sets needed room's field "isReserved" to true  and puts current user
+         * to field "userReserved". Otherwise method returns message.
+         */
         if(CurrentUser.getInstance().getUser()!=null && CurrentUser.getInstance().getUser().getIsRegistered()) {
             String hotelName = null;
             User user = null;
@@ -117,6 +123,11 @@ public class Controller {
     }
 
     public void cancelReservation(long roomId, long userId, long hotelId){
+        /**
+         * If current user is registered, method searches needed room by using hotelId and roomId.
+         * If such room exist and has been reserved by current user - sets needed room's field "isReserved" to false
+         * and field "userReserved" to null. Otherwise method returns message.
+         */
         if(CurrentUser.getInstance().getUser()!=null && CurrentUser.getInstance().getUser().getIsRegistered()) {
             String hotelName = null;
             String id = Long.toString(roomId);
@@ -156,6 +167,14 @@ public class Controller {
     }
 
     public Set<Room> findRoom(Map<String, String> params){
+        /**If current user is registered, method checks for which
+         * parameters room's search has been set. After that creates
+         * "neededRoom" which accord searching parameters and
+         * compare "neededRoom" with available rooms. Returns
+         * list of rooms which approach to user's request.
+         * Otherwise method returns message and empty list
+         *
+         */
         if(CurrentUser.getInstance().getUser()!=null && CurrentUser.getInstance().getUser().getIsRegistered()) {
             Room neededRoom = new Room();
             Set<Room> findRooms = new HashSet<>();
