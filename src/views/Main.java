@@ -158,6 +158,7 @@ public class Main {
         Room r48 = new Room(508L,3,230,"Wall Street Hotel","Odesa",false,null,null);
         Room r49 = new Room(509L,4,270,"Wall Street Hotel","Odesa",false,null,null);
         Room r50 = new Room(510L,2,180,"Wall Street Hotel","Odesa",false,null,null);
+        
         //add rooms for Hotel #5 to set
         Set<Room> hotel05RoomSet = new HashSet<>();
         hotel05RoomSet.add(r41);
@@ -170,6 +171,7 @@ public class Main {
         hotel05RoomSet.add(r48);
         hotel05RoomSet.add(r49);
         hotel05RoomSet.add(r50);
+
         //set Hotel #5 rooms
         h05.setRooms(hotel05RoomSet);
 
