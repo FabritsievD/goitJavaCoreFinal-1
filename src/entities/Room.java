@@ -86,7 +86,7 @@ public class Room implements Serializable {
         if (persons != null ? !persons.equals(room.persons) : false) return false;
         if (price != null ? !price.equals(room.price) : false) return false;
         if (dateAvalibleFrom != null ? !(dateAvalibleFrom.getTime()>=room.dateAvalibleFrom.getTime()) : false )return false;
-        if(isReserved != null ? !isReserved.equals(room.isReserved) : false) return false;
+        //if(isReserved != null ? !isReserved.equals(room.isReserved) : false) return false;
         return city != null ? city.equals(room.city) : true;
 
     }

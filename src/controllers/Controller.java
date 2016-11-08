@@ -235,9 +235,9 @@ public class Controller {
                     System.out.println("Wrong date format");
                 }
             }
-            if(params.containsKey("isReserved")){
-                neededRoom.setIsReserved(Boolean.parseBoolean(params.get("isReserved")));
-            }
+//            if(params.containsKey("isReserved")){
+//                neededRoom.setIsReserved(Boolean.parseBoolean(params.get("isReserved")));
+//            }
 
             Iterator<Room> iterator = RoomDAOImpl.getInstance().getAll().iterator();
             while (iterator.hasNext()) {

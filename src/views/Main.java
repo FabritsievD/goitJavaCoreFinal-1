@@ -158,7 +158,7 @@ public class Main {
         Room r48 = new Room(508L,3,230,"Wall Street Hotel","Odesa",false,null,null);
         Room r49 = new Room(509L,4,270,"Wall Street Hotel","Odesa",false,null,null);
         Room r50 = new Room(510L,2,180,"Wall Street Hotel","Odesa",false,null,null);
-        
+
         //add rooms for Hotel #5 to set
         Set<Room> hotel05RoomSet = new HashSet<>();
         hotel05RoomSet.add(r41);
@@ -264,12 +264,12 @@ public class Main {
 
         /***BookRoom***/
         System.out.println("\n************ Registered user: Book Room test ************");
-        Controller.getInstance().bookRoom(301L, 1001L, 4L);
+        Controller.getInstance().bookRoom(301L, 1001L, 3L);
         //RoomDAOImpl.getInstance().getAll().stream().filter(r -> r.getRoomId() == 301L).forEach(System.out::println);
 
         /***Cancel Room Reservation***/
         System.out.println("\n************ Registered user: Cancel Room Reservation test ************");
-        Controller.getInstance().cancelReservation(301L, 1001L, 4L);
+        Controller.getInstance().cancelReservation(301L, 1001L, 3L);
 
         /***find Hotel by name***/
         System.out.println("\n************ Registered user: Find Hotel by name test ************");
