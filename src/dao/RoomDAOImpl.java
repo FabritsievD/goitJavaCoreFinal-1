@@ -9,14 +9,21 @@ import java.util.Set;
 
 public class RoomDAOImpl implements AbstractDAO<Room> {
 
-    private static RoomDAOImpl instance = new RoomDAOImpl();
     private Set<Room> rooms = new HashSet<>();
     private File fileRooms = new File("persist\\fileRooms.bin");
     private ObjectInputStream roomIputSt;
     private ObjectOutputStream roomOutputSt;
 
+    /**
+     * Class made singleton
+     * */
+    private static RoomDAOImpl instance = new RoomDAOImpl();
+
     public static RoomDAOImpl getInstance() {
         return instance;
+    }
+
+    private RoomDAOImpl() {
     }
 
     @Override

@@ -15,6 +15,9 @@ import java.util.stream.Collectors;
 
 public class Controller {
 
+    /**
+     * Class made singleton
+     * */
     private static Controller instance = new Controller();
 
     public static Controller getInstance() {
@@ -25,11 +28,19 @@ public class Controller {
     }
 
     public void registerUser(User user){
+        /**
+         * Method accepts user as an input and set registration flag to true
+         * */
         user.setIsRegistered(true);
         System.out.println("User " + user + " is registered");
     }
 
     public void switchCurrentUser(User newUser){
+        /**
+         * Method to switch current user.
+         * Accepts user as an input and set
+         * the given user to current
+         * */
         CurrentUser.getInstance().setUser(newUser);
         System.out.println("User " + newUser + " is current");
     }
@@ -114,6 +125,8 @@ public class Controller {
                 else {
                     tmp.setIsReserved(true);
                     tmp.setUserReserved(user);
+                    RoomDAOImpl.getInstance().save(tmp);
+                    System.out.println("Room "+ tmp + " is reserved by user: " + user);
                 }
             }
         }
@@ -156,6 +169,8 @@ public class Controller {
                     }else {
                         tmp.setIsReserved(false);
                         tmp.setUserReserved(null);
+                        RoomDAOImpl.getInstance().save(tmp);
+                        System.out.println("Room "+ tmp + " reservation canceled");
                     }
                 }
             }
@@ -182,9 +197,9 @@ public class Controller {
             if (params.containsKey("City")) {
                 neededRoom.setCity(params.get("City"));
             }
-//            if (params.containsKey("Hotel")) {
-//                neededRoom.setHotel(params.get("Hotel"));
-//            }
+            if (params.containsKey("Hotel")) {
+                neededRoom.setHotel(params.get("Hotel"));
+            }
             if (params.containsKey("Price")) {
                 try {
                     neededRoom.setPrice(Integer.valueOf(params.get("Price")));

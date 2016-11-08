@@ -9,12 +9,15 @@ import java.util.Set;
 public class HotelDAOImpl implements AbstractDAO<Hotel> {
 
 
-    private static HotelDAOImpl instance = new HotelDAOImpl();
     private Set<Hotel> hotels = new HashSet<>();
     private File fileHotels = new File("persist\\fileHotels.bin");
     private ObjectOutputStream hotelOs;
     private ObjectInputStream hotelIs;
 
+    /**
+     * Class made singleton
+     * */
+    private static HotelDAOImpl instance = new HotelDAOImpl();
 
     public static HotelDAOImpl getInstance(){
         return instance;

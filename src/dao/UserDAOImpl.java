@@ -9,11 +9,15 @@ import java.util.Set;
 
 public class UserDAOImpl implements AbstractDAO<User> {
 
-    private static UserDAOImpl instance = new UserDAOImpl();
     private Set<User> users = new HashSet<>();
     private File fileUsers = new File("persist\\fileUsers.bin");
     private ObjectOutputStream userOs;
     private ObjectInputStream userIs;
+
+    /**
+     * Class made singleton
+     * */
+    private static UserDAOImpl instance = new UserDAOImpl();
 
     public static UserDAOImpl getInstance(){
         return instance;
