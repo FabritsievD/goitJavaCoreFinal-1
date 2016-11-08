@@ -2,15 +2,16 @@ package entities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 public class Hotel implements Serializable{
     private long hotelId;
     private String city;
     private String name;
     private int stars;
-    private List<Room> rooms;
+    private Set<Room> rooms;
 
-    public Hotel(long hotelId, String city, String name, int stars, List<Room> rooms) {
+    public Hotel(long hotelId, String city, String name, int stars, Set<Room> rooms) {
         this.hotelId = hotelId;
         this.city = city;
         this.name = name;
@@ -30,12 +31,16 @@ public class Hotel implements Serializable{
         return name;
     }
 
-    public List<Room> getRooms() {
+    public Set<Room> getRooms() {
         return rooms;
     }
 
     public int getStars() {
         return stars;
+    }
+
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
     }
 
     @Override
@@ -66,7 +71,6 @@ public class Hotel implements Serializable{
                 ", city='" + city + '\'' +
                 ", name='" + name + '\'' +
                 ", stars=" + stars +
-                ", rooms=" + rooms +
                 '}';
     }
 }

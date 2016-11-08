@@ -7,7 +7,7 @@ public class Room implements Serializable {
     private Long roomId;
     private Integer persons;
     private Integer price;
-    private String hotel;
+    private Hotel hotel;
     private String city;
     private boolean isReserved;
     private Date dateAvalibleFrom;
@@ -16,7 +16,7 @@ public class Room implements Serializable {
     public Room() {
     }
 
-    public Room(Long roomId, Integer persons, Integer price, String hotel, String city, boolean isReserved, Date dateAvalibleFrom, User userReserved) {
+    public Room(Long roomId, Integer persons, Integer price, Hotel hotel, String city, boolean isReserved, Date dateAvalibleFrom, User userReserved) {
         this.roomId = roomId;
         this.persons = persons;
         this.price = price;
@@ -39,7 +39,7 @@ public class Room implements Serializable {
         this.price = price;
     }
 
-    public void setHotel(String hotel) {
+    public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
 
@@ -59,6 +59,18 @@ public class Room implements Serializable {
         return city;
     }
 
+    public Long getRoomId() {
+        return roomId;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public User getUserReserved() {
+        return userReserved;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,7 +81,6 @@ public class Room implements Serializable {
         if (roomId != null ? !roomId.equals(room.roomId) : room.roomId == null) return false;
         if (persons != null ? !persons.equals(room.persons) : room.persons == null) return false;
         if (price != null ? !price.equals(room.price) : room.price == null) return false;
-        if (hotel != null ? !hotel.equals(room.hotel) : room.hotel == null) return false;
         if (dateAvalibleFrom != null ? !(dateAvalibleFrom.getTime()>=room.dateAvalibleFrom.getTime()) : room.dateAvalibleFrom ==null )return false;
         return city != null ? city.equals(room.city) : room.city != null;
 
@@ -80,7 +91,6 @@ public class Room implements Serializable {
         int result = roomId != null ? roomId.hashCode() : 0;
         result = 31 * result + (persons != null ? persons.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (hotel != null ? hotel.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
         return result;
     }

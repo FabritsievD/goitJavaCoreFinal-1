@@ -6,6 +6,7 @@ public class User implements Serializable{
     private long userId;
     private String firstName;
     private String lastName;
+    private boolean isRegistered;
 
     public User(long userId, String firstName, String lastName) {
         this.userId = userId;
@@ -23,6 +24,14 @@ public class User implements Serializable{
 
     public String getLastName() {
         return lastName;
+    }
+
+    public boolean getIsRegistered() {
+        return isRegistered;
+    }
+
+    public void setIsRegistered(boolean registered) {
+        isRegistered = registered;
     }
 
     @Override
@@ -50,6 +59,8 @@ public class User implements Serializable{
                 "userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", isRegistered=" + isRegistered +
                 '}';
     }
 }
+
