@@ -173,6 +173,7 @@ public class Main {
         hotel06RoomSet.add(r60);
         h06.setRooms(hotel06RoomSet);
 
+        //Persist all hotels
         Set<Hotel> allHotels = new HashSet<>();
         allHotels.add(h01);
         allHotels.add(h02);
