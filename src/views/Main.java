@@ -298,7 +298,7 @@ public class Main {
         //RoomDAOImpl.getInstance().getAll().stream().filter(r -> r.getRoomId() == 301L).forEach(System.out::println);
 
         /***cancel Room Reservation***/
-        System.out.println("************ Unregistered user: Cancel Room Reservation test ************");
+        System.out.println("\n************ Unregistered user: Cancel Room Reservation test ************");
         Controller.getInstance().cancelReservation(301L, 1001L, 401L);
 
         /***find Hotel by name***/
