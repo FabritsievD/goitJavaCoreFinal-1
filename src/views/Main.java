@@ -33,7 +33,7 @@ public class Main {
 
         //Create Hotels and Rooms
         //Create Hotel #1 in City #1
-        Hotel h01 = new Hotel(1,"Kiev","Hilton", 5, null);
+        Hotel h01 = new Hotel(1L,"Kiev","Hilton", 5, null);
         //Create rooms for Hotel #1
         Room r01 = new Room(101L,2,200,"Hilton","Kiev",false,null,null);
         Room r02 = new Room(102L,1,120,"Hilton","Kiev",false,null,null);
@@ -61,7 +61,7 @@ public class Main {
         h01.setRooms(hotel01RoomSet);
 
         //Create Hotel #2 in City #1
-        Hotel h02 = new Hotel(2,"Kiev","Redisson", 5, null);
+        Hotel h02 = new Hotel(2L,"Kiev","Redisson", 5, null);
         //Create rooms for Hotel #2
         Room r11 = new Room(201L,2,200,"Redisson","Kiev",false,null,null);
         Room r12 = new Room(202L,1,120,"Redisson","Kiev",false,null,null);
@@ -90,7 +90,7 @@ public class Main {
 
 
         //Create Hotel #3 in City #2
-        Hotel h03 = new Hotel(3,"Lviv","Ibis", 4, null);
+        Hotel h03 = new Hotel(3L,"Lviv","Ibis", 4, null);
         //Create rooms for Hotel #3
         Room r21 = new Room(301L,2,150,"Ibis","Lviv",false,null,null);
         Room r22 = new Room(302L,1,80,"Ibis","Lviv",false,null,null);
@@ -118,7 +118,7 @@ public class Main {
         h03.setRooms(hotel03RoomSet);
 
         //Create Hotel #4 in City #2
-        Hotel h04 = new Hotel(4,"Lviv","Leotel", 4, null);
+        Hotel h04 = new Hotel(4L,"Lviv","Leotel", 4, null);
         //Create rooms for Hotel #4
         Room r31 = new Room(401L,2,190,"Leotel","Lviv",false,null,null);
         Room r32 = new Room(402L,1,100,"Leotel","Lviv",false,null,null);
@@ -146,7 +146,7 @@ public class Main {
         h04.setRooms(hotel04RoomSet);
 
         //Create Hotel #5 in City #3
-        Hotel h05 = new Hotel(5,"Odesa","Wall Street Hotel", 5, null);
+        Hotel h05 = new Hotel(5L,"Odesa","Wall Street Hotel", 5, null);
         //Create rooms for Hotel #5
         Room r41 = new Room(501L,2,190,"Wall Street Hotel","Odesa",false,null,null);
         Room r42 = new Room(502L,1,100,"Wall Street Hotel","Odesa",false,null,null);
@@ -174,7 +174,7 @@ public class Main {
         h05.setRooms(hotel05RoomSet);
 
         //Create Hotel #6 in City #3
-        Hotel h06 = new Hotel(6,"Odesa","Bristol Hotel", 5, null);
+        Hotel h06 = new Hotel(6L,"Odesa","Bristol Hotel", 5, null);
         //Create rooms for Hotel #6
         Room r51 = new Room(601L,2,190,"Bristol Hotel","Odesa",false,null,null);
         Room r52 = new Room(602L,1,100,"Bristol Hotel","Odesa",false,null,null);
@@ -213,6 +213,7 @@ public class Main {
         //Save all hotels
         HotelDAOImpl.getInstance().saveAll(allHotels);
         //Get and print all saved hotels
+        System.out.println("\n************ Print all Hotels ************");
         HotelDAOImpl.getInstance().getAll().forEach(System.out::println);
 
         //Persist all rooms
@@ -227,17 +228,21 @@ public class Main {
         //Save all rooms
         RoomDAOImpl.getInstance().saveAll(allRooms);
         //Get and print all saved rooms
+        System.out.println("\n************ Print all Rooms ************");
         RoomDAOImpl.getInstance().getAll().forEach(System.out::println);
 
         /***Test controller methods with authorized user***/
 
         //Test for registered current user
         //register user
+        System.out.println("\n************ Register user ************");
         Controller.getInstance().registerUser(u01);
         //make user current
+        System.out.println("\n************ Make registered user current ************");
         Controller.getInstance().switchCurrentUser(u01);
 
         /***find room***/
+        System.out.println("\n************ Registered user: Find Room test #1 ************");
         Map<String, String> findRoomsMap1 = new HashMap<>();
         // Find Room r21 = new Room(301L,2,150,"Ibis","Lviv",false,null,null);
         findRoomsMap1.put("City", "Lviv");
@@ -247,6 +252,7 @@ public class Main {
         findRoomsMap1.put("RoomId", "301");
         System.out.println(Controller.getInstance().findRoom(findRoomsMap1));
 
+        System.out.println("\n************ Registered user: Find Room test #2 ************");
         Map<String, String> findRoomsMap2 = new HashMap<>();
         // Find Room r53 = new Room(603L,3,220,"Bristol Hotel","Odesa",false,null,null);
         findRoomsMap2.put("City", "Odesa");
@@ -254,17 +260,21 @@ public class Main {
         findRoomsMap2.put("Price", "180");
         System.out.println(Controller.getInstance().findRoom(findRoomsMap2));
 
-        /***bookRoom***/
-        Controller.getInstance().bookRoom(301L, 1001L, 401L);
+        /***BookRoom***/
+        System.out.println("\n************ Registered user: Book Room test ************");
+        Controller.getInstance().bookRoom(301L, 1001L, 4L);
         //RoomDAOImpl.getInstance().getAll().stream().filter(r -> r.getRoomId() == 301L).forEach(System.out::println);
 
-        /***cancel Room Reservation***/
-        Controller.getInstance().cancelReservation(301L, 1001L, 401L);
+        /***Cancel Room Reservation***/
+        System.out.println("\n************ Registered user: Cancel Room Reservation test ************");
+        Controller.getInstance().cancelReservation(301L, 1001L, 4L);
 
         /***find Hotel by name***/
+        System.out.println("\n************ Registered user: Find Hotel by name test ************");
         Controller.getInstance().findHotelByName("Bristol Hotel").stream().forEach(System.out::println);
 
         /***find Hotel by city***/
+        System.out.println("\n************ Registered user: Find Hotel by city test ************");
         Controller.getInstance().findHotelByCity("Kiev").stream().forEach(System.out::println);
 
 
@@ -274,26 +284,29 @@ public class Main {
 
         //Test for registered current user
         //make unregistered user current
+        System.out.println("\n************ Make unregistered user current ************");
         Controller.getInstance().switchCurrentUser(u02);
 
         /***find room***/
+        System.out.println("\n************ Unregistered user: Find Room test #1 ************");
         // Find Room r21 = new Room(301L,2,150,"Ibis","Lviv",false,null,null);
         System.out.println(Controller.getInstance().findRoom(findRoomsMap1));
 
-        // Find Room r53 = new Room(603L,3,220,"Bristol Hotel","Odesa",false,null,null);
-        System.out.println(Controller.getInstance().findRoom(findRoomsMap2));
-
         /***bookRoom***/
+        System.out.println("\n************ Unregistered user: Book Room test ************");
         Controller.getInstance().bookRoom(301L, 1001L, 401L);
         //RoomDAOImpl.getInstance().getAll().stream().filter(r -> r.getRoomId() == 301L).forEach(System.out::println);
 
         /***cancel Room Reservation***/
+        System.out.println("************ Unregistered user: Cancel Room Reservation test ************");
         Controller.getInstance().cancelReservation(301L, 1001L, 401L);
 
         /***find Hotel by name***/
+        System.out.println("\n************ Unregistered user: Find Hotel by name test ************");
         Controller.getInstance().findHotelByName("Bristol Hotel").stream().forEach(System.out::println);
 
         /***find Hotel by city***/
+        System.out.println("\n************ Unregistered user: Find Hotel by city test ************");
         Controller.getInstance().findHotelByCity("Kiev").stream().forEach(System.out::println);
 
     }
