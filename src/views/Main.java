@@ -8,27 +8,33 @@ import entities.Hotel;
 import entities.Room;
 import entities.User;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        /***Create entities and test DAO***/
+
         //Create users
         User u01 = new User(1001L, "John", "Doe");
         User u02 = new User(1002L, "Josh", "Smith");
         User u03 = new User(1003L, "Lenny", "Duglas");
+        //Add users to set
         Set<User> userSet = new HashSet<>();
         userSet.add(u01);
         userSet.add(u02);
         userSet.add(u03);
+        //save all users
         UserDAOImpl.getInstance().saveAll(userSet);
-        Controller.getInstance().registerUser(u01);
-        Controller.getInstance().switchCurrentUser(u01);
 
         //Create Hotels and Rooms
+        //Create Hotel #1 in City #1
         Hotel h01 = new Hotel(1,"Kiev","Hilton", 5, null);
+        //Create rooms for Hotel #1
         Room r01 = new Room(101L,2,200,"Hilton","Kiev",false,null,null);
         Room r02 = new Room(102L,1,120,"Hilton","Kiev",false,null,null);
         Room r03 = new Room(103L,3,230,"Hilton","Kiev",false,null,null);
@@ -39,6 +45,7 @@ public class Main {
         Room r08 = new Room(108L,3,230,"Hilton","Kiev",false,null,null);
         Room r09 = new Room(109L,4,280,"Hilton","Kiev",false,null,null);
         Room r10 = new Room(110L,2,200,"Hilton","Kiev",false,null,null);
+        //add rooms for Hotel #1 to set
         Set<Room> hotel01RoomSet = new HashSet<>();
         hotel01RoomSet.add(r01);
         hotel01RoomSet.add(r02);
@@ -50,9 +57,12 @@ public class Main {
         hotel01RoomSet.add(r08);
         hotel01RoomSet.add(r09);
         hotel01RoomSet.add(r10);
+        //set Hotel #1 rooms
         h01.setRooms(hotel01RoomSet);
 
+        //Create Hotel #2 in City #1
         Hotel h02 = new Hotel(2,"Kyiv","Redisson", 5, null);
+        //Create rooms for Hotel #2
         Room r11 = new Room(201L,2,200,"Redisson","Kiev",false,null,null);
         Room r12 = new Room(202L,1,120,"Redisson","Kiev",false,null,null);
         Room r13 = new Room(203L,3,230,"Redisson","Kiev",false,null,null);
@@ -63,6 +73,7 @@ public class Main {
         Room r18 = new Room(208L,3,230,"Redisson","Kiev",false,null,null);
         Room r19 = new Room(209L,4,280,"Redisson","Kiev",false,null,null);
         Room r20 = new Room(210L,2,200,"Redisson","Kiev",false,null,null);
+        //add rooms for Hotel #2 to set
         Set<Room> hotel02RoomSet = new HashSet<>();
         hotel02RoomSet.add(r11);
         hotel02RoomSet.add(r12);
@@ -74,10 +85,13 @@ public class Main {
         hotel02RoomSet.add(r18);
         hotel02RoomSet.add(r19);
         hotel02RoomSet.add(r20);
+        //set Hotel #2 rooms
         h02.setRooms(hotel02RoomSet);
 
 
+        //Create Hotel #3 in City #2
         Hotel h03 = new Hotel(3,"Lviv","Ibis", 4, null);
+        //Create rooms for Hotel #3
         Room r21 = new Room(301L,2,150,"Ibis","Lviv",false,null,null);
         Room r22 = new Room(302L,1,80,"Ibis","Lviv",false,null,null);
         Room r23 = new Room(303L,3,200,"Ibis","Lviv",false,null,null);
@@ -88,6 +102,7 @@ public class Main {
         Room r28 = new Room(308L,3,200,"Ibis","Lviv",false,null,null);
         Room r29 = new Room(309L,4,250,"Ibis","Lviv",false,null,null);
         Room r30 = new Room(310L,2,150,"Ibis","Lviv",false,null,null);
+        //add rooms for Hotel #3 to set
         Set<Room> hotel03RoomSet = new HashSet<>();
         hotel03RoomSet.add(r21);
         hotel03RoomSet.add(r22);
@@ -99,9 +114,12 @@ public class Main {
         hotel03RoomSet.add(r28);
         hotel03RoomSet.add(r29);
         hotel03RoomSet.add(r30);
+        //set Hotel #3 rooms
         h03.setRooms(hotel03RoomSet);
 
+        //Create Hotel #4 in City #2
         Hotel h04 = new Hotel(4,"Lviv","Leotel", 4, null);
+        //Create rooms for Hotel #4
         Room r31 = new Room(401L,2,190,"Leotel","Lviv",false,null,null);
         Room r32 = new Room(402L,1,100,"Leotel","Lviv",false,null,null);
         Room r33 = new Room(403L,3,220,"Leotel","Lviv",false,null,null);
@@ -112,6 +130,7 @@ public class Main {
         Room r38 = new Room(408L,3,230,"Leotel","Lviv",false,null,null);
         Room r39 = new Room(409L,4,270,"Leotel","Lviv",false,null,null);
         Room r40 = new Room(410L,2,180,"Leotel","Lviv",false,null,null);
+        //add rooms for Hotel #4 to set
         Set<Room> hotel04RoomSet = new HashSet<>();
         hotel04RoomSet.add(r31);
         hotel04RoomSet.add(r32);
@@ -123,9 +142,12 @@ public class Main {
         hotel04RoomSet.add(r38);
         hotel04RoomSet.add(r39);
         hotel04RoomSet.add(r40);
+        //set Hotel #4 rooms
         h04.setRooms(hotel04RoomSet);
 
+        //Create Hotel #5 in City #3
         Hotel h05 = new Hotel(5,"Odesa","Wall Street Hotel", 5, null);
+        //Create rooms for Hotel #5
         Room r41 = new Room(501L,2,190,"Wall Street Hotel","Odesa",false,null,null);
         Room r42 = new Room(502L,1,100,"Wall Street Hotel","Odesa",false,null,null);
         Room r43 = new Room(503L,3,220,"Wall Street Hotel","Odesa",false,null,null);
@@ -136,6 +158,7 @@ public class Main {
         Room r48 = new Room(508L,3,230,"Wall Street Hotel","Odesa",false,null,null);
         Room r49 = new Room(509L,4,270,"Wall Street Hotel","Odesa",false,null,null);
         Room r50 = new Room(510L,2,180,"Wall Street Hotel","Odesa",false,null,null);
+        //add rooms for Hotel #5 to set
         Set<Room> hotel05RoomSet = new HashSet<>();
         hotel05RoomSet.add(r41);
         hotel05RoomSet.add(r42);
@@ -147,9 +170,12 @@ public class Main {
         hotel05RoomSet.add(r48);
         hotel05RoomSet.add(r49);
         hotel05RoomSet.add(r50);
+        //set Hotel #5 rooms
         h05.setRooms(hotel05RoomSet);
 
+        //Create Hotel #6 in City #3
         Hotel h06 = new Hotel(6,"Odesa","Bristol Hotel", 5, null);
+        //Create rooms for Hotel #6
         Room r51 = new Room(601L,2,190,"Bristol Hotel","Odesa",false,null,null);
         Room r52 = new Room(602L,1,100,"Bristol Hotel","Odesa",false,null,null);
         Room r53 = new Room(603L,3,220,"Bristol Hotel","Odesa",false,null,null);
@@ -160,6 +186,7 @@ public class Main {
         Room r58 = new Room(608L,3,230,"Bristol Hotel","Odesa",false,null,null);
         Room r59 = new Room(609L,4,270,"Bristol Hotel","Odesa",false,null,null);
         Room r60 = new Room(610L,2,180,"Bristol Hotel","Odesa",false,null,null);
+        //add rooms for Hotel #6 to set
         Set<Room> hotel06RoomSet = new HashSet<>();
         hotel06RoomSet.add(r51);
         hotel06RoomSet.add(r52);
@@ -171,9 +198,11 @@ public class Main {
         hotel06RoomSet.add(r58);
         hotel06RoomSet.add(r59);
         hotel06RoomSet.add(r60);
+        //set Hotel #6 rooms
         h06.setRooms(hotel06RoomSet);
 
         //Persist all hotels
+        //Add all hotels to one set
         Set<Hotel> allHotels = new HashSet<>();
         allHotels.add(h01);
         allHotels.add(h02);
@@ -181,9 +210,13 @@ public class Main {
         allHotels.add(h04);
         allHotels.add(h05);
         allHotels.add(h06);
+        //Save all hotels
         HotelDAOImpl.getInstance().saveAll(allHotels);
+        //Get and print all saved hotels
         HotelDAOImpl.getInstance().getAll().forEach(System.out::println);
 
+        //Persist all rooms
+        //Add all rooms to one set
         Set<Room> allRooms = new HashSet<>();
         allRooms.addAll(hotel01RoomSet);
         allRooms.addAll(hotel02RoomSet);
@@ -191,11 +224,35 @@ public class Main {
         allRooms.addAll(hotel04RoomSet);
         allRooms.addAll(hotel05RoomSet);
         allRooms.addAll(hotel06RoomSet);
+        //Save all rooms
         RoomDAOImpl.getInstance().saveAll(allRooms);
+        //Get and print all saved rooms
         RoomDAOImpl.getInstance().getAll().forEach(System.out::println);
-        //RoomDAOImpl.getInstance().getAll().forEach(System.out::println);
-        //consoleMenu();
-        //ConsoleMenu.getInstance().consoleMenu();
+
+        /***Test controller methods***/
+
+        //Test for registered current user
+        //register user
+        Controller.getInstance().registerUser(u01);
+        //make user current
+        Controller.getInstance().switchCurrentUser(u01);
+        //find room
+        Map<String, String> findRoomsMap1 = new HashMap<>();
+        // Find Room r21 = new Room(301L,2,150,"Ibis","Lviv",false,null,null);
+        findRoomsMap1.put("City", "Lviv");
+        findRoomsMap1.put("Hotel", "Ibis");
+        findRoomsMap1.put("Price", "150");
+        findRoomsMap1.put("Persons", "2");
+        findRoomsMap1.put("RoomId", "301");
+        System.out.println(Controller.getInstance().findRoom(findRoomsMap1));
+
+        Map<String, String> findRoomsMap2 = new HashMap<>();
+        // Find Room r53 = new Room(603L,3,220,"Bristol Hotel","Odesa",false,null,null);
+        findRoomsMap2.put("City", "Odesa");
+        findRoomsMap2.put("Hotel", "Bristol Hotel");
+        findRoomsMap2.put("Price", "180");
+        System.out.println(Controller.getInstance().findRoom(findRoomsMap2));
+
 
     }
 }

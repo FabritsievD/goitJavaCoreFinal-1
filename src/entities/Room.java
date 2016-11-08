@@ -82,10 +82,10 @@ public class Room implements Serializable {
 
         Room room = (Room) o;
 
-        if (roomId != null ? !roomId.equals(room.roomId) : room.roomId == null) return false;
-        if (persons != null ? !persons.equals(room.persons) : room.persons == null) return false;
-        if (price != null ? !price.equals(room.price) : room.price == null) return false;
-        if (dateAvalibleFrom != null ? !(dateAvalibleFrom.getTime()>=room.dateAvalibleFrom.getTime()) : room.dateAvalibleFrom ==null )return false;
+        if (roomId != null ? !roomId.equals(room.roomId) : false) return false;
+        if (persons != null ? !persons.equals(room.persons) : false) return false;
+        if (price != null ? !price.equals(room.price) : false) return false;
+        if (dateAvalibleFrom != null ? !(dateAvalibleFrom.getTime()>=room.dateAvalibleFrom.getTime()) : false )return false;
         return city != null ? city.equals(room.city) : room.city != null;
 
     }

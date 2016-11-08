@@ -216,7 +216,7 @@ public class Controller {
             }
             if (params.containsKey("RoomId")) {
                 try {
-                    neededRoom.setRoomId(Long.valueOf(params.get("Id")));
+                    neededRoom.setRoomId(Long.valueOf(params.get("RoomId")));
                 } catch (NumberFormatException e) {
                     System.out.println("Wrong Id");
                 }
