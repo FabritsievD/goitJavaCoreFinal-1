@@ -82,7 +82,8 @@ public class UserDAOImpl implements AbstractDAO<User> {
          * and saves merged set of Users back to persistent storage
          * */
         if(users.size() > 0 && users != null) {
-            this.users = users;
+            this.users = getAll();
+            this.users.addAll(users);
             try {
                 userOs = new ObjectOutputStream(new FileOutputStream(fileUsers));
                 userOs.writeObject(this.users);

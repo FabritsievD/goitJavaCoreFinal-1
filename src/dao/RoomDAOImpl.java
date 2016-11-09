@@ -78,7 +78,8 @@ public class RoomDAOImpl implements AbstractDAO<Room> {
          * and saves merged set of Rooms back to persistent storage
          * */
         if(rooms.size() > 0 && rooms != null) {
-            this.rooms = rooms;
+            this.rooms = getAll();
+            this.rooms.addAll(rooms);
             try {
                 roomOutputSt = new ObjectOutputStream(new FileOutputStream(fileRooms));
                 roomOutputSt.writeObject(this.rooms);
