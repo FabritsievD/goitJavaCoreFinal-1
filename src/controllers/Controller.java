@@ -99,18 +99,18 @@ public class Controller {
             Iterator<Hotel> hotelIterator = HotelDAOImpl.getInstance().getAll().iterator();
 
             while (hotelIterator.hasNext()) {
-                Hotel tmp = hotelIterator.next();
-                if (tmp.getHotelId() == hotelId) {
-                    hotelName = tmp.getName();
+                Hotel targetHotel = hotelIterator.next();
+                if (targetHotel.getHotelId() == hotelId) {
+                    hotelName = targetHotel.getName();
                     break;
                 }
             }
 
             Iterator<User> userIterator = UserDAOImpl.getInstance().getAll().iterator();
             while (userIterator.hasNext()) {
-                User tmp = userIterator.next();
-                if (tmp.getUserId() == userId) {
-                    user = tmp;
+                User targetUser = userIterator.next();
+                if (targetUser.getUserId() == userId) {
+                    user = targetUser;
                 }
             }
 
@@ -120,13 +120,13 @@ public class Controller {
 
             if (findRoom(map).size() > 0) {
                 Iterator<Room> roomIterator = findRoom(map).iterator();
-                Room tmp = roomIterator.next();
-                if(tmp.getIsReserved()) System.out.println("Room already reserved");
+                Room targetRoom = roomIterator.next();
+                if(targetRoom.getIsReserved()) System.out.println("Room already reserved");
                 else {
-                    tmp.setIsReserved(true);
-                    tmp.setUserReserved(user);
-                    RoomDAOImpl.getInstance().save(tmp);
-                    System.out.println("Room "+ tmp + " is reserved by user: " + user);
+                    targetRoom.setIsReserved(true);
+                    targetRoom.setUserReserved(user);
+                    RoomDAOImpl.getInstance().save(targetRoom);
+                    System.out.println("Room "+ targetRoom + " is reserved by user: " + user);
                 }
             }
         }
@@ -148,9 +148,9 @@ public class Controller {
             Iterator<Hotel> hotelIterator = HotelDAOImpl.getInstance().getAll().iterator();
 
             while (hotelIterator.hasNext()) {
-                Hotel tmp = hotelIterator.next();
-                if (tmp.getHotelId() == hotelId) {
-                    hotelName = tmp.getName();
+                Hotel targetHotel = hotelIterator.next();
+                if (targetHotel.getHotelId() == hotelId) {
+                    hotelName = targetHotel.getName();
                     break;
                 }
             }
@@ -162,16 +162,16 @@ public class Controller {
             if (findRoom(map).size() > 0) {
                 Iterator<Room> roomIterator = findRoom(map).iterator();
                 while (roomIterator.hasNext()) {
-                    Room tmp = roomIterator.next();
-                   if (!tmp.getIsReserved()) System.out.println("Room is not reserved at the moment");
+                    Room targetRoom = roomIterator.next();
+                   if (!targetRoom.getIsReserved()) System.out.println("Room is not reserved at the moment");
                     else {
-                        if (!tmp.getUserReserved().equals(CurrentUser.getInstance().getUser())) {
+                        if (!targetRoom.getUserReserved().equals(CurrentUser.getInstance().getUser())) {
                             System.out.println("Room is reserved by other user. You are not authorized cancel this reservation");
                         } else {
-                            tmp.setIsReserved(false);
-                            tmp.setUserReserved(null);
-                            RoomDAOImpl.getInstance().save(tmp);
-                            System.out.println("Room " + tmp + " reservation canceled");
+                            targetRoom.setIsReserved(false);
+                            targetRoom.setUserReserved(null);
+                            RoomDAOImpl.getInstance().save(targetRoom);
+                            System.out.println("Room " + targetRoom + " reservation canceled");
                         }
                     }
                 }
@@ -225,11 +225,11 @@ public class Controller {
             }
             if (params.containsKey("From")) {
 
-                String tmp = params.get("From");
+                String targetDateFrom = params.get("From");
                 SimpleDateFormat format = new SimpleDateFormat();
                 format.applyPattern("dd.MM.yyyy");
                 try {
-                    Date date = format.parse(tmp);
+                    Date date = format.parse(targetDateFrom);
                     neededRoom.setDateAvalibleFrom(date);
                 } catch (ParseException e) {
                     System.out.println("Wrong date format");
@@ -241,9 +241,9 @@ public class Controller {
 
             Iterator<Room> iterator = RoomDAOImpl.getInstance().getAll().iterator();
             while (iterator.hasNext()) {
-                Room tmp = iterator.next();
-                if (neededRoom.equals(tmp)) {
-                    findRooms.add(tmp);
+                Room targetRoom = iterator.next();
+                if (neededRoom.equals(targetRoom)) {
+                    findRooms.add(targetRoom);
                 }
             }
             return findRooms;

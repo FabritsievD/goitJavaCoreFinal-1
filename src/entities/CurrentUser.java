@@ -1,7 +1,12 @@
 package entities;
 
 public class CurrentUser {
-    User user;
+
+    private User user;
+
+    /**
+     * Class made singleton
+     * */
     private static CurrentUser instance = new CurrentUser();
 
     private CurrentUser() {
